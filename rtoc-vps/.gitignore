@@ -1,0 +1,17 @@
+# Secrets - never commit
+.env
+.env.*
+!.env.example
+
+# Dependencies / build
+node_modules/
+.vercel/
+
+# User-uploaded avatars/squad pictures — live only on the VPS, never in git
+uploads/
+
+# Logs / OS
+*.log
+.DS_Store
+!uploads/avatars/.gitkeep
+!uploads/squads/.gitkeep

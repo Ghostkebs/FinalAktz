@@ -1,0 +1,24 @@
+[Unit]
+Description=Robinhood Tournament of Champions
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=rtoc
+Group=rtoc
+WorkingDirectory=/opt/rtoc/app
+Environment=NODE_ENV=production
+# Secrets are read from /opt/rtoc/app/.env by the app itself (dotenv)
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=3
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

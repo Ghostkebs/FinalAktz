@@ -1,0 +1,1233 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Robinhood Tournament of Champions</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090b;--s:#131317;--s2:#1b1b21;--b:#2b2b34;--t:#f3efe6;--m:#8b8994;--g:#d6b26a;--g2:#f2dca4;--ok:#5fd0a0;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--t);font:14px/1.5 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;overflow-x:hidden}
+#bgc{position:fixed;inset:0;z-index:0;width:100vw;height:100vh;background:radial-gradient(900px 500px at 50% -80px,#2a2314,transparent),var(--bg)}
+.w{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:0 16px 48px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:26px 0 16px}
+.logo{font-weight:800;font-size:26px;letter-spacing:.42em;background:linear-gradient(90deg,var(--g2),var(--g),var(--g2));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(-14px) scale(.94);animation:enter .9s cubic-bezier(.2,.9,.25,1) .1s forwards,shine 5s linear 1.2s infinite}
+@keyframes enter{60%{opacity:1;transform:translateY(2px) scale(1.02)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes shine{to{background-position:200% center}}
+.pill{opacity:0;animation:fadein .7s ease .55s forwards}
+@keyframes fadein{to{opacity:1}}
+.pill{border:1px solid var(--b);background:var(--s);border-radius:99px;padding:6px 14px;font-size:12px;color:var(--m)}.pill b{color:var(--g2)}
+.hright{display:flex;align-items:center;gap:10px}
+.uinfo{font-size:12px;color:var(--m)}.uinfo b{color:var(--g2)}
+nav{display:flex;gap:4px;border-bottom:1px solid var(--b);margin-bottom:20px;overflow-x:auto;position:relative}
+nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--m);font:600 13px Manrope,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:12px 16px;cursor:pointer;white-space:nowrap;transition:color .25s}
+nav button.on{color:var(--g2)}
+#ul{position:absolute;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--g2),var(--g));border-radius:2px;transition:left .32s cubic-bezier(.2,.8,.2,1),width .32s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 10px #d6b26a80}
+main{display:block}
+main.sw{animation:swap .38s cubic-bezier(.2,.8,.2,1)}
+@keyframes swap{0%{opacity:0;transform:translateY(10px) scale(.985)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.card,.pc,tr[data-a],.mt{opacity:0;animation:rise .45s cubic-bezier(.2,.8,.2,1) forwards}
+.card{animation-delay:.02s}
+.grid .pc:nth-child(1){animation-delay:.03s}.grid .pc:nth-child(2){animation-delay:.07s}.grid .pc:nth-child(3){animation-delay:.11s}.grid .pc:nth-child(4){animation-delay:.15s}.grid .pc:nth-child(5){animation-delay:.19s}.grid .pc:nth-child(6){animation-delay:.23s}.grid .pc:nth-child(n+7){animation-delay:.26s}
+table tr:nth-child(1){animation-delay:.03s}table tr:nth-child(2){animation-delay:.06s}table tr:nth-child(3){animation-delay:.09s}table tr:nth-child(4){animation-delay:.12s}table tr:nth-child(5){animation-delay:.15s}table tr:nth-child(n+6){animation-delay:.18s}
+table tr:first-child{opacity:1;animation:none}
+.br .mt:nth-child(1){animation-delay:.05s}.br .mt:nth-child(2){animation-delay:.1s}.br .mt:nth-child(3){animation-delay:.15s}.br .mt:nth-child(4){animation-delay:.2s}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tb{background:var(--s);border:1px solid var(--b);color:var(--m);border-radius:10px;padding:8px 14px;font:600 13px Manrope,system-ui,sans-serif;cursor:pointer;transition:transform .15s,background .2s,color .2s,border-color .2s}
+.tb:active{transform:scale(.94)}
+.tb.on{color:#1a1405;background:linear-gradient(135deg,var(--g2),var(--g));border-color:var(--g)}
+.tb:disabled{opacity:.35;cursor:default}
+.md{animation:mfade .25s ease}
+.mb{animation:mpop .3s cubic-bezier(.2,.8,.25,1)}
+@keyframes mfade{from{opacity:0}to{opacity:1}}
+@keyframes mpop{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.card{background:linear-gradient(180deg,var(--s),#101014);backdrop-filter:blur(6px);border:1px solid var(--b);border-radius:16px;padding:20px;margin-bottom:18px}
+.ch{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px}
+h2{margin:0;font-size:18px}h3{margin:0 0 10px;font-size:15px}
+h4{margin:0 0 10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--m)}
+.tag{font-size:11px;color:var(--g2);border:1px solid #4a3d1f;background:#1d1809;border-radius:99px;padding:3px 10px}
+.mu{color:var(--m)}
+.sc{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--m);text-align:left;padding:8px 10px;border-bottom:1px solid var(--b)}
+td{padding:12px 10px;border-bottom:1px solid #1e1e25}
+tr[data-a]{cursor:pointer}tr[data-a]:hover td{background:#17171d}
+.rk{font-weight:800;color:var(--m);width:44px}tr:nth-child(2) .rk,tr:nth-child(2) td:nth-child(2){color:var(--g2)}
+.pt{font-weight:800;color:var(--g2)}td i{color:var(--m);font-style:normal;font-size:12px}
+
+/* ── Player stats modal ── */
+.pmod-ov{position:fixed;inset:0;background:#000c;z-index:100;display:flex;align-items:flex-end;justify-content:center;padding:0;animation:mfade .2s ease}
+@media(min-width:520px){.pmod-ov{align-items:center;padding:16px}}
+.pmod{background:linear-gradient(160deg,#1c150a,#0d0b07);border:1px solid #4a3413;border-radius:20px 20px 0 0;width:100%;max-width:520px;max-height:88vh;overflow-y:auto;padding:20px;position:relative;animation:mpop .3s cubic-bezier(.2,.8,.25,1)}
+@media(min-width:520px){.pmod{border-radius:20px}}
+.pmod-bar{width:40px;height:4px;background:var(--b);border-radius:99px;margin:0 auto 18px}
+.pmod-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.pmod-name{font-size:20px;font-weight:800;color:#f2dca4}
+.pmod-sub{font-size:12px;color:#8b7a5a;margin-top:2px}
+.pmod-close{position:absolute;top:16px;right:16px;background:none;border:1px solid var(--b);color:var(--m);border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.pmod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.pmod-stat{background:#13100a;border:1px solid #3a2b0f;border-radius:12px;padding:10px;text-align:center}
+.pmod-stat b{display:block;font-size:18px;color:#f2dca4}
+.pmod-stat span{font-size:10px;color:#8b7a5a;text-transform:uppercase;letter-spacing:.06em}
+.pmod-sec{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8b7a5a;margin:14px 0 8px;font-weight:700}
+.pmod-match{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #1e1814;font-size:13px}
+.pmod-match:last-child{border-bottom:0}
+.pmod-squad{width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin-bottom:12px}
+.pmod-trophy{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #1e1814;font-size:13px}
+.pmod-trophy:last-child{border-bottom:0}
+
+.br{display:grid;grid-template-columns:repeat(3,minmax(210px,1fr));gap:18px;overflow-x:auto;padding-bottom:6px}
+.col{display:flex;flex-direction:column;gap:12px;justify-content:space-around}
+.mt{background:var(--s2);border:1px solid var(--b);border-radius:12px;padding:8px}
+.mt.live{border-color:var(--g);box-shadow:0 0 0 3px #d6b26a1a}
+.tm{display:flex;justify-content:space-between;padding:6px 8px;border-radius:8px;color:var(--m)}
+.tm.w{color:var(--t);font-weight:800;background:#d6b26a14}.tm.w b{color:var(--g2)}
+.in{display:flex;gap:6px;margin-top:6px}
+input,select{background:#0c0c0f;border:1px solid var(--b);color:var(--t);border-radius:10px;padding:9px 10px;font:600 14px Manrope,system-ui,sans-serif;min-width:0}
+.in input{width:52px}
+input:focus,select:focus{outline:2px solid var(--g);outline-offset:1px}
+.btn{background:linear-gradient(135deg,var(--g2),var(--g));color:#1a1405;border:0;border-radius:10px;padding:10px 18px;font:800 13px Manrope,system-ui,sans-serif;cursor:pointer}
+.btn.gh{background:none;border:1px solid var(--b);color:var(--t)}.btn.red{background:none;border:1px solid #c0392b;color:#e74c3c}
+.btn:disabled{opacity:.4;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip{background:var(--s2);border:1px solid var(--b);border-radius:99px;padding:6px 12px;font-weight:600;cursor:pointer;color:var(--t)}
+.pr{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:10px}.pr select{width:100%}
+.pr span{color:var(--m);font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.pc{cursor:pointer;background:var(--s2);border:1px solid var(--b);border-radius:14px;padding:14px}.pc:hover{border-color:var(--g)}
+.pc b{display:block;font-size:16px}.pc span{color:var(--m);font-size:12px}
+.md{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;padding:16px;z-index:9}
+.mb{background:var(--s);border:1px solid var(--g);border-radius:18px;padding:24px;max-width:520px;width:100%;max-height:88vh;overflow:auto}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.st div{background:var(--s2);border-radius:12px;padding:10px;text-align:center}.st b{display:block;font-size:20px;color:var(--g2)}.st span{font-size:11px;color:var(--m)}
+.ln{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #1e1e25}
+#ts{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--g);color:#1a1405;font-weight:800;padding:10px 18px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;z-index:10}
+#ts.on{opacity:1}
+#ts.err{background:#c0392b;color:#fff}
+
+/* ── Dashboard theme ── */
+.dcard{background:linear-gradient(160deg,#1c150a,#110e08);border:1px solid #3a2b0f;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 4px 24px #0008}
+.dcard .sechead{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8b7a5a;margin:0 0 12px;font-weight:700}
+.dpick{margin-bottom:14px}
+.dpick select{background:#13100a;border:1px solid #4a3413;color:#f2dca4;border-radius:10px;padding:8px 12px;font:600 13px Manrope,sans-serif;width:100%;max-width:260px}
+#dashArea{background:linear-gradient(160deg,#13100a 0%,#0d0b07 100%);border:1px solid #4a3413;border-radius:18px;padding:18px;box-shadow:0 0 40px #000a,inset 0 0 60px #0004;position:relative;overflow:hidden}
+#dashArea:before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#d6b26a,#f2dca4,#a87832,#d6b26a);background-size:200%;animation:shine 4s linear infinite;border-radius:18px 18px 0 0}
+
+/* Auth screen */
+.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px ;position:relative;z-index:1}
+.auth-box{background:var(--s);border:1px solid var(--b);border-radius:20px;padding:32px;width:100%;max-width:380px}
+.auth-box h2{margin:0 0 6px;font-size:22px}
+.auth-box p{color:var(--m);margin:0 0 24px;font-size:13px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-size:12px;font-weight:600;color:var(--m);letter-spacing:.08em;text-transform:uppercase}
+.field input{width:100%;font-size:14px}
+.auth-box .btn{width:100%;padding:12px;font-size:14px;margin-top:6px}
+.auth-switch{text-align:center;margin-top:16px;color:var(--m);font-size:13px}
+.auth-switch button{background:none;border:0;color:var(--g2);font:600 13px Manrope,sans-serif;cursor:pointer;padding:0}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #1a140566;border-top-color:#1a1405;border-radius:50%;animation:sp .6s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.loading{text-align:center;padding:40px;color:var(--m)}
+/* ── V2 Dashboard ── */
+.dcard{background:linear-gradient(160deg,#1c1a12 0%,#131317 60%);border:1px solid #2e2a1c;border-radius:20px;padding:22px;margin-bottom:14px;position:relative;overflow:hidden}
+.dcard::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,#d6b26a18,transparent 70%);pointer-events:none}
+.dhead{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:4px 0 16px}
+.avwrap{position:relative;width:96px;height:96px;margin-bottom:8px;flex-shrink:0}
+.avimg{width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid var(--g);display:block;box-shadow:0 0 24px #d6b26a40}
+.avph{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#2a2318,#1c1915);border:3px solid var(--b);display:flex;align-items:center;justify-content:center;color:var(--g2);font-size:34px;font-weight:800}
+.avedit{position:absolute;bottom:0;right:0;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g));border:2px solid var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;color:#1a1405;box-shadow:0 2px 8px #0007}
+.dname{font-size:20px;font-weight:800;letter-spacing:.01em;line-height:1.2}
+.drank{color:var(--g);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+.dstats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:12px 0 4px}
+.dstat{background:#0d0d10;border:1px solid #232330;border-radius:12px;padding:12px 10px;text-align:center;transition:border-color .2s}
+.dstat:hover{border-color:var(--b)}
+.dstat b{display:block;font-size:22px;font-weight:800;color:var(--g2);line-height:1}
+.dstat span{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.07em;margin-top:4px;display:block}
+.squadcard{border-radius:12px;overflow:hidden;background:#0d0d10;border:1px solid #232330;margin-bottom:10px}
+.squadimg{width:100%;max-height:200px;object-fit:cover;display:block}
+.squadph{width:100%;height:100px;display:flex;align-items:center;justify-content:center;color:var(--m);font-size:12px;gap:8px}
+.squadmeta{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;font-size:12px;color:var(--m);border-top:1px solid #1c1c24}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #1c1c24;font-size:13px;gap:8px}
+.mrow:last-child{border-bottom:0}
+.mrow .mscore{font-weight:700;color:var(--t)}
+.mrow .mopp{color:var(--m);font-size:12px}
+.res{font-size:10px;font-weight:800;padding:3px 8px;border-radius:99px;flex-shrink:0;letter-spacing:.04em}
+.res.W{background:#0f2e1a;color:#6ee7a8;border:1px solid #1a5230}
+.res.L{background:#2e0f0f;color:#f87171;border:1px solid #5c1a1a}
+.res.D{background:#2a240e;color:var(--g2);border:1px solid #4a3d14}
+.trophy{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #1c1c24;font-size:13px}
+.trophy:last-child{border-bottom:0}
+.ticon{font-size:18px;width:28px;text-align:center;flex-shrink:0}
+.uplab{display:inline-flex;align-items:center;cursor:pointer}
+.uplab input{display:none}
+.h2hpick{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.h2hpick select{flex:1}
+.h2hcard{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.h2hcol{background:#0d0d10;border:1px solid #232330;border-radius:12px;padding:14px;text-align:center}
+.h2hcol b{display:block;font-size:28px;font-weight:800;color:var(--g2);line-height:1}
+.h2hcol span{font-size:11px;color:var(--m);margin-top:4px;display:block}
+.formdots{display:flex;gap:4px;justify-content:center;margin-top:8px}
+.fdot{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
+.fdot.W{background:#0f2e1a;color:#6ee7a8}.fdot.L{background:#2e0f0f;color:#f87171}.fdot.D{background:#2a240e;color:var(--g2)}
+.hofrow{display:flex;align-items:center;gap:10px;padding:10px 8px;border-bottom:1px solid #1c1c24;border-radius:8px;transition:background .15s;cursor:pointer}
+.hofrow:hover{background:#17171d}
+.hofrow:last-child{border-bottom:0}
+.hofrank{width:24px;font-weight:800;color:var(--m);text-align:center;font-size:13px;flex-shrink:0}
+.hofrank.top{color:var(--g2)}
+.miniav{width:34px;height:34px;border-radius:50%;object-fit:cover;background:var(--s2);border:1px solid var(--b);flex-shrink:0}
+.pager{display:flex;justify-content:center;gap:10px;margin-top:14px;align-items:center}
+.sechead{font-size:11px;font-weight:700;color:var(--m);letter-spacing:.1em;text-transform:uppercase;margin:0 0 10px}
+.dpick{display:flex;justify-content:center;margin-bottom:14px}
+.dpick select{max-width:260px;width:100%}
+.loading .spin{border-color:var(--b);border-top-color:var(--g);width:24px;height:24px;margin:0 auto 12px;display:block}
+/* ── V2: Dashboard ── */
+.dhead{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:8px 0 18px}
+.avwrap{position:relative;width:104px;height:104px;margin-bottom:6px}
+.avimg{width:104px;height:104px;border-radius:50%;object-fit:cover;border:3px solid var(--g);background:var(--s2);display:block}
+.avph{width:104px;height:104px;border-radius:50%;background:var(--s2);border:3px dashed var(--b);display:flex;align-items:center;justify-content:center;color:var(--m);font-size:32px;font-weight:800}
+.avedit{position:absolute;bottom:-2px;right:-2px;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g));border:2px solid var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:#1a1405}
+.dname{font-size:22px;font-weight:800;margin-top:4px}
+.drank{color:var(--g2);font-size:13px;font-weight:700}
+.dstats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0}
+.dstat{background:var(--s2);border:1px solid var(--b);border-radius:14px;padding:14px;text-align:center}
+.dstat b{display:block;font-size:24px;color:var(--g2)}
+.dstat span{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:.06em}
+.squadcard{background:var(--s2);border:1px solid var(--b);border-radius:14px;padding:12px;margin-bottom:16px}
+.squadimg{width:100%;max-height:220px;object-fit:cover;border-radius:10px;display:block;background:#0c0c0f}
+.squadph{width:100%;height:120px;border-radius:10px;background:#0c0c0f;border:2px dashed var(--b);display:flex;align-items:center;justify-content:center;color:var(--m);font-size:12px}
+.squadmeta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px;color:var(--m)}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #1e1e25;font-size:13px}
+.mrow:last-child{border-bottom:0}
+.res{font-size:11px;font-weight:800;padding:3px 9px;border-radius:99px}
+.res.W{background:#12331f;color:var(--ok)}
+.res.L{background:#331414;color:#e77}
+.res.D{background:#2a260f;color:var(--g2)}
+.trophy{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #1e1e25}
+.trophy:last-child{border-bottom:0}
+.uplab{display:inline-block}
+.uplab input{display:none}
+.h2hpick{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-bottom:14px}
+.h2hpick span{color:var(--m);font-size:12px;text-align:center}
+.h2hcard{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.h2hcol{background:var(--s2);border-radius:12px;padding:12px;text-align:center}
+.h2hcol b{display:block;font-size:20px;color:var(--g2)}
+.formdots{display:flex;gap:5px;justify-content:center;margin-top:6px}
+.fdot{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
+.fdot.W{background:#12331f;color:var(--ok)}.fdot.L{background:#331414;color:#e77}.fdot.D{background:#2a260f;color:var(--g2)}
+.hofrow{display:flex;align-items:center;gap:10px;padding:10px 8px;border-bottom:1px solid #1e1e25;border-radius:8px}
+.hofrow:hover{background:#17171d}
+.hofrank{width:26px;font-weight:800;color:var(--m);text-align:center}
+.hofrank.top{color:var(--g2)}
+.miniav{width:34px;height:34px;border-radius:50%;object-fit:cover;background:var(--s2);border:1px solid var(--b)}
+.pager{display:flex;justify-content:center;gap:10px;margin-top:14px}
+</style></head>
+<body>
+<canvas id="bgc"></canvas>
+<div id="root"></div>
+<div id="mod"></div>
+<div id="ts"></div>
+
+<script>
+/* ── BACKGROUND CANVAS ── */
+(function(){const c=document.getElementById('bgc'),x=c.getContext('2d');let W,H,pts=[];
+function size(){W=c.width=innerWidth;H=c.height=innerHeight}
+function init(){size();const n=Math.min(70,Math.floor(W/22));pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.6+.6}))}
+function step(){x.clearRect(0,0,W,H);
+ for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+  x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fillStyle='rgba(214,178,106,.55)';x.fill()}
+ for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+  if(d<120){x.strokeStyle='rgba(214,178,106,'+(0.14*(1-d/120))+')';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}
+ requestAnimationFrame(step)}
+addEventListener('resize',size);init();step();})();
+</script>
+
+<script>
+/* ── STATE ── */
+const PTS=[100,70,50,35,20,20,20,20];
+const ord=n=>n==5?'5th–8th':n+(['st','nd','rd'][n-1]||'th');
+const $=q=>document.querySelector(q);
+const root=$('#root');
+
+let AUTH={token:null,user:null};
+let DB={cycles:[],currentCycle:null,currentSeason:null,players:[]};
+let UI={view:'dashboard',cycleId:null,seasonN:null,dashName:null,hofCat:'most_titles',hofCycle:'all',loading:false};
+
+/* ── AUTH HELPERS ── */
+function saveAuth(token,user){AUTH={token,user};try{localStorage.setItem('rtoc_token',token);localStorage.setItem('rtoc_user',JSON.stringify(user))}catch(e){}}
+function loadAuth(){try{const t=localStorage.getItem('rtoc_token'),u=localStorage.getItem('rtoc_user');if(t&&u){AUTH={token:t,user:JSON.parse(u)};return true}}catch(e){}return false}
+function clearAuth(){AUTH={token:null,user:null};try{localStorage.removeItem('rtoc_token');localStorage.removeItem('rtoc_user')}catch(e){}}
+const isAdmin=()=>AUTH.user&&(AUTH.user.role==='admin'||AUTH.user.role==='moderator');
+
+/* ── API ── */
+async function api(method,path,body){
+  const opts={method,headers:{'Content-Type':'application/json'}};
+  if(AUTH.token)opts.headers['Authorization']='Bearer '+AUTH.token;
+  if(body)opts.body=JSON.stringify(body);
+  const res=await fetch('/api'+path,opts);
+  const data=await res.json().catch(()=>({}));
+  if(res.status===401){clearAuth();renderAuth();throw new Error('Session expired')}
+  if(!res.ok)throw new Error(data.error||'Request failed');
+  return data;
+}
+const GET=p=>api('GET',p);
+const POST=(p,b)=>api('POST',p,b);
+
+/* ── TOAST ── */
+let toastTimer;
+function toast(msg,err=false){const t=$('#ts');t.textContent=msg;t.className='on'+(err?' err':'');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.className='',2400)}
+
+/* ── LOADING ── */
+function renderLoading(msg='Loading...'){root.innerHTML=`<div class="w"><div class="loading"><span class="spin"></span>${msg}</div></div>`}
+
+/* ── AUTH SCREEN ── */
+let authMode='login';
+function renderAuth(){
+  root.innerHTML=`<div class="auth-wrap"><div class="auth-box">
+    <div class="logo" style="font-size:16px;letter-spacing:.3em;margin-bottom:20px;display:block;opacity:1;transform:none;animation:none;background:linear-gradient(90deg,var(--g2),var(--g),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">Robinhood Tournament</div>
+    <h2>${authMode==='login'?'Welcome back':authMode==='register'?'Create account':'Reset password'}</h2>
+    <p>${authMode==='login'?'Sign in to continue':authMode==='register'?'Enter your details below':"Enter your username and we\'ll email you a reset link"}</p>
+    ${authMode==='forgot'?`
+      <div class="field"><label>EMAIL ADDRESS</label><input id="aem" type="email" placeholder="The email you registered with" autocomplete="email"></div>
+      <button class="btn" id="asub">Send reset link</button>
+      <div class="auth-switch"><button id="atog">Back to sign in</button></div>
+    `:`
+      <div class="field"><label>USERNAME</label><input id="au" type="text" placeholder="Your username" autocomplete="username"></div>
+      ${authMode==='register'?'<div class="field"><label>EMAIL ADDRESS</label><input id="aem" type="email" placeholder="you@example.com" autocomplete="email"></div>':''}
+      <div class="field"><label>PASSWORD</label><input id="ap" type="password" placeholder="Password" autocomplete="${authMode==='login'?'current-password':'new-password'}"></div>
+      ${authMode==='register'?'<div class="field"><label>ROLE CODE (OPTIONAL)</label><input id="arc" type="text" placeholder="Admin code if you have one"></div>':''}
+      <button class="btn" id="asub">Sign ${authMode==='login'?'in':'up'}</button>
+      ${authMode==='login'?'<div class="auth-switch"><button id="aforg">Forgot password?</button></div>':''}
+      <div class="auth-switch">${authMode==='login'?'No account?':'Have an account?'} <button id="atog">${authMode==='login'?'Register':'Sign in'}</button></div>
+    `}
+  </div></div>`;
+  $('#asub').onclick=doAuth;
+  const tog=$('#atog');if(tog)tog.onclick=()=>{authMode=authMode==='forgot'?'login':authMode==='login'?'register':'login';renderAuth()};
+  const fg=$('#aforg');if(fg)fg.onclick=()=>{authMode='forgot';renderAuth()};
+  const au=$('#au');if(au){au.focus();au.addEventListener('keydown',e=>{if(e.key==='Enter')doAuth()});}
+  const ap=$('#ap');if(ap)ap.addEventListener('keydown',e=>{if(e.key==='Enter')doAuth()});
+}
+
+async function doAuth(){
+  const u=($('#au')||{}).value?.trim()||'';
+  const btn=$('#asub');btn.disabled=true;
+  if(authMode==='forgot'){
+    const aem=($('#aem')||{}).value?.trim()||'';
+    if(!aem)return(toast('Enter your email address',true),btn.disabled=false);
+    btn.innerHTML='<span class="spin"></span>Sending…';
+    try{
+      const res=await POST('/auth/forgot',{email:aem});
+      toast('Reset link sent to '+aem);
+      setTimeout(()=>{authMode='login';renderAuth()},2000);
+    }catch(e){toast(e.message,true);btn.disabled=false;btn.innerHTML='Send reset link'}
+    return;
+  }
+  const p=($('#ap')||{}).value||'';
+  if(!u||!p)return(toast('Enter username and password',true),btn.disabled=false);
+  btn.innerHTML='<span class="spin"></span>Signing in…';
+  try{
+    let data;
+    if(authMode==='login'){
+      data=await POST('/auth/login',{username:u,password:p});
+    }else{
+      const rc=$('#arc'),em=$('#aem');
+      const role_code=rc?rc.value.trim():'';
+      const email=em?em.value.trim():'';
+      if(!email)return(toast('Email address is required',true),btn.disabled=false,btn.innerHTML='Sign up');
+      data=await POST('/auth/register',{username:u,password:p,role_code,email});
+    }
+    saveAuth(data.token,data.user);
+    init();
+  }catch(e){toast(e.message,true);btn.disabled=false;btn.innerHTML='Sign '+(authMode==='login'?'in':'up')}
+}
+
+/* ── INIT / DATA LOAD ── */
+async function init(){
+  renderLoading('Loading tournament data…');
+  try{
+    const{cycles}=await GET('/cycles');
+    DB.cycles=cycles||[];
+    if(DB.cycles.length===0){
+      // Auto-create first cycle if admin
+      if(isAdmin()){await POST('/cycles');const{cycles:c2}=await GET('/cycles');DB.cycles=c2||[]}
+    }
+    if(DB.cycles.length>0){
+      UI.cycleId=UI.cycleId||DB.cycles[DB.cycles.length-1].id;
+      await loadCycleData(UI.cycleId);
+    }
+    const{players}=await GET('/players');
+    DB.players=players||[];
+    render();
+  }catch(e){toast(e.message,true);renderLoading('Failed to load. Retrying…');setTimeout(init,3000)}
+}
+
+async function loadCycleData(cycleId){
+  const{seasons}=await GET('/seasons?cycle_id='+cycleId);
+  DB.seasons=seasons||[];
+  DB.currentCycle=DB.cycles.find(c=>c.id==cycleId)||DB.cycles[DB.cycles.length-1];
+  DB.currentSeason=DB.seasons.filter(s=>!s.done).sort((a,b)=>a.season_number-b.season_number)[0]
+    ||DB.seasons[DB.seasons.length-1];
+}
+
+/* ── POLL every 5s when on play view ── */
+let pollTimer;
+function startPoll(){clearInterval(pollTimer);pollTimer=setInterval(async()=>{
+  if(UI.view==='play'&&UI.cycleId&&DB.currentSeason?.started){
+    const activeInput=document.activeElement;
+    const typingScore=activeInput&&activeInput.tagName==='INPUT'&&activeInput.type==='number';
+    const anyFilled=[...document.querySelectorAll('input[type=number]')].some(i=>i.value!=='');
+    if(typingScore||anyFilled)return;
+    await loadSeasonBracket(DB.currentSeason.id);
+    renderApp();
+  }
+},5000)}
+function stopPoll(){clearInterval(pollTimer)}
+
+/* ── RENDER SHELL ── */
+function render(){
+  const cyc=DB.currentCycle;
+  const se=DB.currentSeason;
+  const pillTxt=!cyc?'No cycles yet':(se&&!se.done?`Cycle <b>${cyc.cycle_number}</b> · Season <b>${se.season_number}</b> of 10`:`Cycle <b>${cyc.cycle_number}</b> complete`);
+  root.innerHTML=`<div class="w">
+    <header>
+      <div class="logo">Robinhood Tournament of Champions</div>
+      <div class="hright">
+        <div class="pill" id="pill">${pillTxt}</div>
+        <span class="uinfo"><b>${AUTH.user?.username||''}</b> <span style="color:var(--m)">${AUTH.user?.role||''}</span></span>
+        <button class="btn gh" id="logout" style="padding:6px 12px;font-size:12px">Logout</button>
+      </div>
+    </header>
+    <nav id="nav"></nav>
+    <main id="app"></main>
+  </div>`;
+  $('#logout').onclick=()=>{clearAuth();stopPoll();renderAuth()};
+  renderNav();
+  renderApp();
+  startPoll();
+}
+
+function renderNav(){
+  const tabs=[['dashboard','Home'],['play','Tournaments'],['board','Leaderboard'],['hof','Hall of Fame'],['seasons','Seasons'],['players','Players']];
+  $('#nav').innerHTML=tabs.map(([v,t])=>`<button class="${UI.view==v?'on':''}" data-nav="${v}">${t}</button>`).join('')+'<span id="ul"></span>';
+  $('#nav').querySelectorAll('button[data-nav]').forEach(b=>b.onclick=()=>{UI.view=b.dataset.nav;renderApp();moveUl()});
+  moveUl();
+}
+
+function moveUl(){const on=$('#nav')&&$('#nav').querySelector('button.on'),ul=$('#ul');if(!on||!ul)return;ul.style.left=on.offsetLeft+'px';ul.style.width=on.offsetWidth+'px'}
+addEventListener('resize',moveUl);
+
+function renderApp(){
+  const app=$('#app');if(!app)return;
+  const views={board:renderBoard,play:renderPlay,seasons:renderSeasons,players:renderPlayers,dashboard:renderDashboardView,hof:renderHofView};
+  app.innerHTML=(views[UI.view]||renderBoard)();
+  app.classList.remove('sw');void app.offsetWidth;app.classList.add('sw');
+  bindApp();
+}
+
+/* ── CYCLE TABS ── */
+function cycleTabs(){
+  return`<div class="tabs">${DB.cycles.map(c=>`<button class="tb ${c.id==UI.cycleId?'on':''}" data-switchchcycle="${c.id}">Cycle ${c.cycle_number}</button>`).join('')}</div>`;
+}
+
+/* ── BOARD ── */
+function renderBoard(){
+  if(!DB.cycles.length)return`<div class="card"><p class="mu">No cycles yet. ${isAdmin()?'Go to Current Season to start.':''}</p></div>`;
+  if(!AVCACHE)getAvatars().then(()=>{if(UI.view==='board')renderApp()});
+  const lb=DB.leaderboard||[];
+  const cyc=DB.currentCycle;
+  const done=DB.seasons?DB.seasons.filter(s=>s.done).length:0;
+  return cycleTabs()+`<div class="card">
+    <div class="ch"><h2>Cycle ${cyc?.cycle_number||''} Leaderboard</h2><span class="tag">${done==10?'Final':done+' / 10 seasons'}</span></div>
+    ${lb.length?`<div class="sc"><table><tr><th>#</th><th>Player</th><th>Points</th><th>Best finish</th><th>Streak</th><th>Seasons</th></tr>
+    ${lb.map((r,i)=>`<tr data-a="pf" data-n="${r.name}"><td class="rk">${i+1}</td><td><div class="row" style="gap:8px;flex-wrap:nowrap">${avEl(r.name,26)}<b>${r.name}</b></div></td><td class="pt">${r.points}</td><td>${ord(r.best_finish)}</td><td>${r.current_streak} <i>best ${r.best_streak}</i></td><td>${r.seasons_played}</td></tr>`).join('')}
+    </table></div>`:'<p class="mu">No completed seasons yet in this cycle.</p>'}
+  </div>`;
+}
+
+/* ── PLAY ── */
+function renderPlay(){
+  if(!DB.cycles.length){
+    if(!isAdmin())return`<div class="card"><p class="mu">No active season. Ask your admin to start one.</p></div>`;
+    return`<div class="card"><h2>Welcome</h2><p class="mu">No cycles exist yet. Start the first one to begin.</p><button class="btn" id="btnNewCycle">Start Cycle 1</button></div>`;
+  }
+  const se=DB.currentSeason;
+  if(!se){
+    const completedCount=DB.seasons?DB.seasons.filter(s=>s.done).length:0;
+    const allDone=completedCount>=10;
+    if(!isAdmin())return`<div class="card"><p class="mu">No active season. Ask your admin to start one.</p></div>`;
+    return`<div class="card"><h2>No Active Season</h2><p class="mu">${allDone?'All 10 seasons complete. Start a new cycle.':'The previous tournament was cancelled. Start a new one.'}</p>
+      <div class="row" style="margin-top:12px">
+        ${allDone
+          ?`<button class="btn" id="btnNewCycle">Start New Cycle</button>`
+          :`<button class="btn" id="btnNextSeason">Start Season ${completedCount+1}</button>`}
+      </div>
+    </div>`;
+  }
+  const cycNum=DB.currentCycle?.cycle_number||'';
+  const head=`<div class="ch"><h2>Cycle ${cycNum} · Season ${se.season_number}</h2><span class="tag">${se.done?'Locked':se.started?'In play':se.season_players?.length>=8?'Step 2 of 3':'Step 1 of 3'}</span></div>`;
+
+  // Season done — show results + next season or new cycle
+  if(se.done){
+    const allDone=DB.seasons.every(s=>s.done)&&DB.seasons.length>=10;
+    return`<div class="card">${head}
+      ${renderBracket(se,false)}
+      ${isAdmin()?`<div class="row" style="margin-top:16px">
+        ${allDone?`<button class="btn" id="btnNewCycle">Start New Cycle</button>`:
+          `<button class="btn" id="btnNextSeason">Start Season ${se.season_number+1}</button>`}
+      </div>`:''}
+    </div>`;
+  }
+
+  // Step 1: Add players
+  if(!se.started&&(!se.season_players||se.season_players.length<8)&&UI._step!=='matchups'){
+    const added=(se.season_players||[]).map(p=>p.name||p);
+    const quick=DB.players.map(p=>p.name).filter(n=>!added.includes(n));
+    return`<div class="card">${head}
+      <h3>Add players (${added.length}/8)</h3>
+      <div class="row"><input id="pn" placeholder="Player name" maxlength="30"><button class="btn" id="btnAddPlayer">Add</button></div>
+      <div class="row" style="margin:14px 0">${added.map(p=>`<span class="chip" data-rmplayer="${p}">${p} ✕</span>`).join('')||'<span class="mu">No players yet</span>'}</div>
+      ${quick.length&&isAdmin()?`<h4>Quick add</h4><div class="row">${quick.slice(0,12).map(p=>`<span class="chip" data-qaplayer="${p}">+ ${p}</span>`).join('')}</div>`:''}
+      ${added.length===8&&isAdmin()?`<button class="btn" id="btnSetMatchups" style="margin-top:12px">Set Matchups →</button>`:''}
+      ${isAdmin()?`<button class="btn" id="btnCancelTournament" style="margin-top:14px;background:#e74c3c">Cancel Tournament</button>`:''}
+    </div>`;
+   
+  }
+
+  // Step 2: Set matchups
+  if(!se.started&&(UI._step==='matchups'||(se.season_players&&se.season_players.length>=8))){
+    const added=(se.season_players||[]).map(p=>p.name||p);
+    const opt=v=>added.map(n=>`<option ${n==v?'selected':''}>${n}</option>`).join('');
+    return`<div class="card">${head}
+      <h3>Set the quarterfinal matchups</h3>
+      ${[0,1,2,3].map(i=>`<div class="pr"><select class="ps">${opt(added[i*2])}</select><span>VS</span><select class="ps">${opt(added[i*2+1])}</select></div>`).join('')}
+      <div class="row" style="margin-top:14px">
+        ${isAdmin()?`<button class="btn" id="btnStartBracket">Start Bracket</button><button class="btn gh" id="btnShuffle">Shuffle</button>`:''}
+        <button class="btn gh" id="btnBackPlayers">← Change Players</button>
+      </div>
+    </div>`;
+  }
+
+  // Step 3: Bracket in play
+  const _ms=se.matches||DB.bracketMatches||[];
+  const ready=['final','third'].every(r=>_ms.some(m=>m.round===r&&m.locked));
+  return`<div class="card">${head}
+    <p class="mu" style="margin-top:0">Enter scores and lock each match. Winners advance automatically.</p>
+    ${renderBracket(se,isAdmin())}
+    ${isAdmin()?`<div class="row" style="margin-top:16px"><button class="btn" id="btnFinish" ${ready?'':'disabled'}>🏁 Finish Tournament</button><button class="btn red" id="btnCancelTournament">✕ Cancel Tournament</button></div>${ready?'':'<p class="mu" style="font-size:12px;margin:8px 0 0">Finish unlocks once the Final and 3rd-place match both have results.</p>'}`:''}
+  </div>`;
+}
+
+/* ── BRACKET RENDERER ── */
+function renderBracket(se,editable,editMode=false){
+  const matches=se.matches||DB.bracketMatches||[];
+  const byRound={qf:[],sf:[],final:[],third:[]};
+  matches.forEach(m=>{if(byRound[m.round]!==undefined)byRound[m.round].push(m)});
+  byRound.qf.sort((a,b)=>a.match_index-b.match_index);
+  byRound.sf.sort((a,b)=>a.match_index-b.match_index);
+
+  const mc=(m)=>{
+    if(!m)return`<div class="mt"><div class="tm">TBD</div><div class="tm">TBD</div></div>`;
+    const w=m.winner_id;
+    const rowA=`<div class="tm ${w&&w==m.player_a_id?'w':''}"><span>${m.player_a_name||'TBD'}</span>${m.score_a!=null?`<b>${m.score_a}</b>`:''}</div>`;
+    const rowB=`<div class="tm ${w&&w==m.player_b_id?'w':''}"><span>${m.player_b_name||'TBD'}</span>${m.score_b!=null?`<b>${m.score_b}</b>`:''}</div>`;
+    const canScore=editable&&m.player_a_id&&m.player_b_id&&!m.locked;
+    const canEdit=editMode&&m.locked&&m.player_a_id&&m.player_b_id;
+    return`<div class="mt ${canScore||canEdit?'live':''}">${rowA}${rowB}
+      ${canScore?`<div class="in"><input type="number" min="0" id="sa${m.id}" placeholder="0"><input type="number" min="0" id="sb${m.id}" placeholder="0"><button class="btn" data-lockm="${m.id}">Lock</button></div>`:''}
+      ${canEdit?`<div class="in"><input type="number" min="0" id="ea${m.id}" value="${m.score_a??''}"><input type="number" min="0" id="eb${m.id}" value="${m.score_b??''}"><button class="btn" style="background:linear-gradient(135deg,#5fd0a0,#3aab7a)" data-editm="${m.id}">Save</button></div>`:''}
+    </div>`;
+  };
+
+  const qfHtml=[0,1,2,3].map(i=>mc(byRound.qf[i])).join('');
+  const sfHtml=[0,1].map(i=>mc(byRound.sf[i])).join('');
+  const fHtml=mc(byRound.final[0]);
+  const tHtml=mc(byRound.third[0]);
+
+  return`<div class="br">
+    <div class="col"><h4>Quarterfinals</h4>${qfHtml}</div>
+    <div class="col"><h4>Semifinals</h4>${sfHtml}</div>
+    <div class="col"><div><h4>Final</h4>${fHtml}</div><div><h4>3rd Place</h4>${tHtml}</div></div>
+  </div>`;
+}
+
+/* ── SEASONS ── */
+function renderSeasons(){
+  if(!DB.cycles.length)return`<div class="card"><p class="mu">No cycles yet.</p></div>`;
+  const seasons=DB.seasons||[];
+  const curSn=UI.seasonN||(seasons.filter(s=>s.done).slice(-1)[0]?.season_number||0);
+  const se=seasons.find(s=>s.season_number==curSn);
+
+  const seasonTabs=Array.from({length:10},(_,i)=>{
+    const s=seasons.find(s=>s.season_number==i+1);
+    const ok=s&&s.done,lv=s&&!s.done&&s.started;
+    return`<button class="tb ${curSn==i+1?'on':''}" ${s?'':'disabled'} data-ssn="${i+1}">S${i+1}${lv?' •':''}</button>`;
+  }).join('');
+
+  if(!se||!se.done)return cycleTabs()+`<div class="tabs">${seasonTabs}</div><div class="card"><p class="mu">No completed seasons yet.</p></div>`;
+
+  const matches=se.matches||[];
+  const placements=se.season_players||[];
+  const sorted=[...placements].sort((a,b)=>(a.placement||9)-(b.placement||9));
+
+  const editMode=UI.editSeasonId==se.id;
+  return cycleTabs()+`<div class="tabs">${seasonTabs}</div>
+    <div class="card">
+      <div class="ch">
+        <h2>Cycle ${DB.currentCycle?.cycle_number} · Season ${se.season_number}</h2>
+        <div class="row">
+          <span class="tag">${editMode?'Edit mode':'Locked'}</span>
+          ${isAdmin()?`<button class="btn ${editMode?'red':'gh'}" id="btnToggleEdit" data-sid="${se.id}" style="padding:6px 12px;font-size:12px">${editMode?'✕ Cancel Edit':'✎ Edit Results'}</button>`:''}
+        </div>
+      </div>
+      ${editMode?`<p class="mu" style="margin-top:0;font-size:12px">Fix any score and press Save. Winners, placements, points and streaks are recalculated automatically.</p>`:''}
+      ${renderBracket(se,false,editMode)}
+    </div>
+    <div class="card"><h3>Final Placements</h3>
+    ${sorted.map(p=>`<div class="ln"><span>${ord(p.placement||5)} &nbsp;<b>${p.name||p.player_name||''}</b></span><span class="pt">+${PTS[(p.placement||5)-1]}</span></div>`).join('')}
+    </div>`;
+}
+
+/* ── PLAYERS ── */
+function renderPlayers(){
+  const pl=DB.players||[];
+  if(!AVCACHE)getAvatars().then(()=>{if(UI.view==='players')renderApp()});
+  return`<div class="card"><div class="ch"><h2>All Players</h2><span class="tag">${pl.length} on record</span></div>
+    <div class="grid">${pl.map(p=>`<div class="pc" style="position:relative">
+      <div data-a="pf" data-n="${p.name}" style="cursor:pointer;display:flex;gap:10px;align-items:center">
+        ${avEl(p.name,38)}
+        <div><b style="display:block">${p.name}</b>
+        <span>${p.career_points||0} pts · ${p.seasons_played||0} seasons · ${p.titles||0} titles</span></div>
+      </div>
+      ${isAdmin()?`<button class="btn red" data-deleteplayer="${p.name}" style="position:absolute;top:8px;right:8px;padding:4px 8px;font-size:11px;border:1px solid #c0392b;background:none;color:#e74c3c;border-radius:8px">✕</button>`:''}
+    </div>`).join('')||'<p class="mu">No players yet.</p>'}
+    </div></div>`;
+}
+
+/* ── PLAYER PROFILE MODAL (read-only stats popup for everyone) ── */
+async function showProfile(name){
+  // Show read-only stats modal (works for everyone)
+  const ov=document.createElement('div');
+  ov.className='pmod-ov';
+  ov.innerHTML=`<div class="pmod"><div class="pmod-bar"></div>
+    <button class="pmod-close" id="pmodClose">✕</button>
+    <div class="pmod-head">${avEl(name,52)}<div><div class="pmod-name">${name}</div><div class="pmod-sub">Loading…</div></div></div>
+    <div id="pmodBody"><div class="loading"><span class="spin"></span></div></div>
+  </div>`;
+  document.body.appendChild(ov);
+  ov.querySelector('#pmodClose').onclick=()=>ov.remove();
+  ov.onclick=e=>{if(e.target===ov)ov.remove()};
+  try{
+    const d=await GET('/players/dashboard?name='+encodeURIComponent(name));
+    const p=d.player,c=d.career,st=d.streak,rec=d.recent_matches||[],tr=d.trophies||[];
+    ov.querySelector('.pmod-sub').textContent=c.career_points+' career pts'+(c.titles?' · 🏆 '+c.titles+' title'+(c.titles>1?'s':''):'');
+    if(p.avatar_url)ov.querySelector('.pmod-head img, .pmod-head div.miniav').outerHTML=`<img src="${p.avatar_url}?t=${Date.now()}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #d6b26a">`;
+    const body=ov.querySelector('#pmodBody');
+    body.innerHTML=`
+      ${p.squad_url?`<img src="${p.squad_url}?t=${Date.now()}" class="pmod-squad">`:'' }
+      <div class="pmod-grid">
+        <div class="pmod-stat"><b>${c.win_rate}%</b><span>Win rate</span></div>
+        <div class="pmod-stat"><b>${c.wins}</b><span>Wins</span></div>
+        <div class="pmod-stat"><b>${c.played}</b><span>Matches</span></div>
+        <div class="pmod-stat"><b>${c.gf}</b><span>Goals scored</span></div>
+        <div class="pmod-stat"><b>${c.ga}</b><span>Goals conceded</span></div>
+        <div class="pmod-stat"><b>${st.current||st.longest||0}</b><span>${st.current?'Win streak':'Best streak'}</span></div>
+      </div>
+      ${rec.length?`<div class="pmod-sec">Recent Matches</div>
+        ${rec.map(m=>`<div class="pmod-match">
+          <span><b>${name}</b> <span style="color:var(--m)">${m.gf}–${m.ga}</span> ${m.opponent} <span style="color:var(--m);font-size:11px">· C${m.cycle_number} S${m.season_number}</span></span>
+          <span class="res ${m.result}">${m.result==='W'?'WIN':m.result==='L'?'LOSS':'DRAW'}</span>
+        </div>`).join('')}`:''}
+      ${tr.length?`<div class="pmod-sec">🏆 Titles</div>
+        ${tr.map(t=>`<div class="pmod-trophy">🏆 <span>Cycle ${t.cycle_number} · Season ${t.season_number} Champion</span></div>`).join('')}`:''}
+      ${isAdmin()?`<div style="margin-top:16px;padding-top:14px;border-top:1px solid #2a2010">
+        <button class="btn gh" style="width:100%;font-size:12px" id="pmodGoDash">View full dashboard →</button>
+      </div>`:''}`;
+    // Admin only: go to full dashboard
+    const gd=body.querySelector('#pmodGoDash');
+    if(gd)gd.onclick=()=>{ov.remove();UI.view='dashboard';UI.dashName=name;renderNav();renderApp()};
+  }catch(e){
+    ov.querySelector('#pmodBody').innerHTML=`<p class="mu">${e.message}</p>`;
+  }
+}
+
+/* ══════════════════════════ V2: DASHBOARD ══════════════════════════ */
+let AVCACHE=null;
+async function getAvatars(){
+  if(AVCACHE)return AVCACHE;
+  try{const d=await GET('/players/avatars');AVCACHE=d.avatars||{}}catch(e){AVCACHE={}}
+  return AVCACHE;
+}
+function avEl(name,size){
+  const url=AVCACHE&&AVCACHE[String(name||'').toLowerCase()];
+  const s=size||34;
+  return url?`<img src="${url}" class="miniav" style="width:${s}px;height:${s}px">`
+    :`<div class="miniav" style="width:${s}px;height:${s}px;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--m);font-size:${Math.round(s*.4)}px">${(name||'?')[0].toUpperCase()}</div>`;
+}
+
+function renderDashboardView(){
+  if(!isAdmin())UI.dashName=null;  // regular users always see their own
+  loadDashboard(UI.dashName||null);
+  return `<div id="dashArea"><div class="loading"><span class="spin"></span>Loading profile…</div></div>`;
+}
+
+async function loadDashboard(name){
+  try{
+    await getAvatars();
+    let linkInfo={player:null,candidate:null};
+    try{linkInfo=await GET('/players/link');}catch(e){}
+    const isMine=!!(linkInfo.player&&linkInfo.player.name===name);
+    
+    // Regular users can ONLY see their own dashboard
+    if(!isAdmin()&&!isMine&&name){
+      const el=$('#dashArea');if(el)el.innerHTML=`<div class="card"><p class="mu">You can only view your own profile.</p></div>`;
+      return;
+    }
+    
+    // If no name specified, load their own or show message
+    let target=name;
+    if(!target){
+      if(linkInfo.player) target=linkInfo.player.name;
+      else if(linkInfo.candidate) target=linkInfo.candidate.name;
+      else if(isAdmin()&&DB.players&&DB.players.length) target=DB.players[0].name;
+    }
+    
+    if(!target){
+      const el=$('#dashArea');if(el)el.innerHTML=`<div class="card"><p class="mu">You haven't claimed a player profile yet. Contact an admin to link your account.</p></div>`;
+      return;
+    }
+    
+    UI.dashName=target;
+    const d=await GET('/players/dashboard?name='+encodeURIComponent(target));
+    const isMineTarget=!!(linkInfo.player&&linkInfo.player.name===target);
+    const canEdit=isMineTarget||isAdmin();
+    UI._dashData=d;UI._dashIsMine=canEdit;
+    renderDashboardInto(d,canEdit,linkInfo.candidate);
+  }catch(e){
+    const el=$('#dashArea');if(el)el.innerHTML=`<div class="card"><p class="mu">Could not load profile: ${e.message}</p></div>`;
+  }
+}
+
+function renderDashboardInto(d,isMine,candidate){
+  const el=$('#dashArea');if(!el)return;
+  const p=d.player,c=d.career,st=d.streak,rec=d.recent_matches||[],trophies=d.trophies||[];
+
+  const playerPicker=isAdmin()?`<div class="dpick" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <select id="dashPick" style="flex:1;max-width:220px">${(DB.players||[]).map(pl=>`<option ${pl.name===p.name?'selected':''}>${pl.name}</option>`).join('')}</select>
+    <button class="btn gh" id="btnOpenLinkUI" style="padding:6px 14px;font-size:12px">🔗 Link Accounts</button>
+  </div>
+  <div id="adminLinkArea"></div>`:'';
+
+  const avatarHtml=p.avatar_url
+    ?`<img src="${p.avatar_url}?t=${Date.now()}" class="avimg">`
+    :`<div class="avph">${p.name[0].toUpperCase()}</div>`;
+
+  const editAv=isMine?`<label class="avedit uplab" title="Change avatar">✎<input type="file" accept="image/jpeg,image/png,image/webp" id="avatarInput"></label>`:'';
+
+  const streakDisplay=st.current?`🔥 ${st.current} Win${st.current>1?'s':''}`:st.longest?`Best: ${st.longest}`:'—';
+
+  // Auto-link: only show claim if logged-in username exactly matches this player name (case-insensitive)
+  const usernameMatch=candidate&&candidate.name.toLowerCase()===AUTH.user?.username?.toLowerCase()&&candidate.name===p.name;
+  const claimBtn=(!isMine&&usernameMatch)
+    ?`<button class="btn gh" id="btnClaim" style="margin-top:8px;font-size:12px;padding:7px 18px">✋ This is me — link my account</button>`
+    :(!isMine&&!p.claimed?`<p class="mu" style="font-size:12px;margin-top:6px">Contact an admin to link your account to this profile.</p>`:'');
+
+  el.innerHTML=playerPicker+`
+  <div class="dcard">
+    <div class="dhead">
+      <div class="avwrap">${avatarHtml}${editAv}</div>
+      <div class="dname">${p.name}</div>
+      <div class="drank">${c.career_points} career pts${c.titles?` &nbsp;·&nbsp; 🏆 ${c.titles} title${c.titles>1?'s':''}`:''}</div>
+      ${claimBtn}
+    </div>
+    <div class="dstats">
+      <div class="dstat"><b>${c.win_rate}%</b><span>Win Rate</span></div>
+      <div class="dstat"><b>${streakDisplay}</b><span>Streak</span></div>
+      <div class="dstat"><b>${c.played}</b><span>Matches</span></div>
+      <div class="dstat"><b>${c.wins}</b><span>Wins</span></div>
+      <div class="dstat"><b>${c.gf}</b><span>Goals Scored</span></div>
+      <div class="dstat"><b>${c.ga}</b><span>Goals Conceded</span></div>
+    </div>
+  </div>
+
+  <div class="dcard"><p class="sechead">Squad Picture</p>
+    <div class="squadcard">
+      ${p.squad_url?`<img src="${p.squad_url}?t=${Date.now()}" class="squadimg" loading="lazy">`:`<div class="squadph">📸 No squad picture uploaded yet</div>`}
+      <div class="squadmeta">
+        <span>${p.squad_team||''}${p.squad_team&&p.squad_formation?' · ':''  }${p.squad_formation||''}</span>
+        ${isMine?`<label class="uplab btn gh" style="padding:5px 12px;font-size:11px;border-radius:99px">📷 Change<input type="file" accept="image/jpeg,image/png,image/webp" id="squadInput"></label>`:''}
+      </div>
+    </div>
+    ${isMine?`<div class="row" style="gap:8px;margin-top:8px"><input id="squadTeam" placeholder="Team name" value="${p.squad_team||''}" maxlength="40" style="flex:1"><input id="squadForm" placeholder="Formation (4-3-3)" value="${p.squad_formation||''}" maxlength="14" style="width:130px"><button class="btn gh" id="btnSaveSquadInfo">Save</button></div>`:''}
+  </div>
+
+  <div class="dcard"><p class="sechead">Recent Matches</p>
+    ${rec.length?rec.map(m=>`<div class="mrow">
+      <div><span class="mscore">${p.name} ${m.gf}–${m.ga} ${m.opponent}</span><br><span class="mopp">${m.round_label||''} · C${m.cycle_number} S${m.season_number}</span></div>
+      <span class="res ${m.result}">${m.result==='W'?'WIN':m.result==='L'?'LOSS':'DRAW'}</span>
+    </div>`).join(''):`<p class="mu" style="text-align:center;padding:16px 0">No official matches yet</p>`}
+    ${c.played>3?`<button class="btn gh" id="btnViewAllMatches" style="margin-top:10px;width:100%">View All Matches (${c.played})</button>`:''}
+    <div id="fullHistory"></div>
+  </div>
+
+  ${trophies.length?`<div class="dcard"><p class="sechead">🏆 Trophy Cabinet</p>
+    ${trophies.map(t=>`<div class="trophy"><span class="ticon">🏆</span><span>Cycle ${t.cycle_number} · Season ${t.season_number} Champion</span></div>`).join('')}
+    <p class="mu" style="margin:10px 0 0;font-size:12px">${trophies.length} Total Title${trophies.length>1?'s':''}</p>
+  </div>`:''}
+
+  <div class="dcard"><p class="sechead">Head to Head</p>
+    <div class="h2hpick">
+      <span class="mu" style="font-size:12px;flex-shrink:0">${p.name} vs</span>
+      <select id="h2hOpp">${(DB.players||[]).filter(pl=>pl.name!==p.name).map(pl=>`<option>${pl.name}</option>`).join('')}</select>
+    </div>
+    <div id="h2hResult"><p class="mu" style="font-size:12px">Select an opponent above</p></div>
+  </div>`;
+
+  const dp=$('#dashPick');if(dp)dp.onchange=e=>{UI.dashName=e.target.value;renderApp()};
+  const bla=$('#btnOpenLinkUI');
+  if(bla)bla.onclick=()=>renderAdminLinkUI();
+  const bc=$('#btnClaim');
+  if(bc)bc.onclick=async()=>{bc.disabled=true;try{await POST('/players/link',{action:'claim',player_id:d.player.id});toast('Profile claimed!');await loadDashboard(p.name)}catch(e){toast(e.message,true);bc.disabled=false}};
+  const avIn=$('#avatarInput');if(avIn)avIn.onchange=()=>uploadPic(avIn,'avatar',d.player.id,p.name);
+  const sqIn=$('#squadInput');if(sqIn)sqIn.onchange=()=>uploadPic(sqIn,'squad',d.player.id,p.name);
+  const bsi=$('#btnSaveSquadInfo');
+  if(bsi)bsi.onclick=async()=>{bsi.disabled=true;try{await POST('/players/squad-info',{player_id:d.player.id,team:$('#squadTeam').value,formation:$('#squadForm').value});toast('Squad info saved!')}catch(e){toast(e.message,true)}bsi.disabled=false};
+  const bva=$('#btnViewAllMatches');if(bva)bva.onclick=()=>loadFullHistory(p.name,1);
+  const h2hSel=$('#h2hOpp');
+  if(h2hSel&&h2hSel.options.length){loadH2H(p.name,h2hSel.value);h2hSel.onchange=()=>loadH2H(p.name,h2hSel.value)}
+}
+
+async function uploadPic(input,kind,playerId,name){
+  const file=input.files&&input.files[0];if(!file)return;
+  if(!file.type.startsWith('image/'))return toast('Please choose an image',true);
+  toast('Uploading…');
+  try{
+    // Send full-size — no shrinking
+    const blob=file;
+    const res=await fetch('/api/players/media?player_id='+playerId+'&kind='+kind,{
+      method:'POST',
+      headers:{'Content-Type':file.type||'image/jpeg','Authorization':'Bearer '+AUTH.token},
+      body:blob
+    });
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok)throw new Error(data.error||'Upload failed');
+    AVCACHE=null;
+    toast(kind==='avatar'?'Avatar updated!':'Squad picture updated!');
+    await loadDashboard(name);
+  }catch(e){toast(e.message,true)}
+}
+
+async function loadFullHistory(name,page){
+  const el=$('#fullHistory');if(!el)return;
+  el.innerHTML='<p class="mu" style="margin-top:12px">Loading…</p>';
+  try{
+    const d=await GET('/players/match-history?name='+encodeURIComponent(name)+'&page='+page+'&per_page=20');
+    const totalPages=Math.max(1,Math.ceil(d.total/d.per_page));
+    el.innerHTML=`<h4 style="margin-top:16px">All Matches (${d.total})</h4>
+      ${d.matches.map(m=>`<div class="mrow"><span>${name} <i class="mu">${m.gf}–${m.ga}</i> ${m.opponent} <i class="mu">· C${m.cycle_number} S${m.season_number} ${m.round_label}</i></span><span class="res ${m.result}">${m.result==='W'?'WIN':m.result==='L'?'LOSS':'DRAW'}</span></div>`).join('')||'<p class="mu">No matches.</p>'}
+      <div class="pager">
+        <button class="btn gh" id="phPrev" ${page<=1?'disabled':''}>← Prev</button>
+        <span class="mu" style="align-self:center">Page ${page} / ${totalPages}</span>
+        <button class="btn gh" id="phNext" ${page>=totalPages?'disabled':''}>Next →</button>
+      </div>`;
+    const pv=$('#phPrev'),nx=$('#phNext');
+    if(pv)pv.onclick=()=>loadFullHistory(name,page-1);
+    if(nx)nx.onclick=()=>loadFullHistory(name,page+1);
+  }catch(e){el.innerHTML='';toast(e.message,true)}
+}
+
+async function loadH2H(p1,p2){
+  const el=$('#h2hResult');if(!el)return;
+  el.innerHTML='<p class="mu">Loading…</p>';
+  try{
+    const d=await GET('/players/head-to-head?player1='+encodeURIComponent(p1)+'&player2='+encodeURIComponent(p2));
+    const [a,b]=d.players;
+    el.innerHTML=`<div class="h2hcard">
+      <div class="h2hcol"><b>${a.stats.wins}</b><span class="mu">${a.name} Wins</span></div>
+      <div class="h2hcol"><b>${b.stats.wins}</b><span class="mu">${b.name} Wins</span></div>
+    </div>
+    <div class="row" style="justify-content:space-around;text-align:center;margin-bottom:14px">
+      <div><b style="display:block;font-size:16px;color:var(--g2)">${a.stats.played}</b><span class="mu" style="font-size:11px">Total Matches</span></div>
+      <div><b style="display:block;font-size:16px;color:var(--g2)">${a.stats.gf}–${b.stats.gf}</b><span class="mu" style="font-size:11px">Goals</span></div>
+    </div>
+    <h4>Recent Meetings</h4>
+    ${d.recent.length?d.recent.map(m=>`<div class="mrow"><span>${a.name} <i class="mu">${m.gf}–${m.ga}</i> ${b.name}</span><span class="res ${m.result}">${m.result==='W'?a.name.slice(0,3).toUpperCase()+' W':m.result==='L'?b.name.slice(0,3).toUpperCase()+' W':'DRAW'}</span></div>`).join(''):'<p class="mu">No matches yet.</p>'}`;
+  }catch(e){el.innerHTML='';toast(e.message,true)}
+}
+
+/* ══════════════════════════ V2: HALL OF FAME ══════════════════════════ */
+const HOF_CATS=[['most_titles','🏆 Most Titles'],['top_scorers','⚽ Top Scorers'],['longest_streak','🔥 Longest Streak']];
+function renderHofView(){
+  UI.hofCat=UI.hofCat||'most_titles';
+  UI.hofCycle=UI.hofCycle||'all';
+  // Build cycle options from DB
+  const cycleOpts=(DB.cycles||[]).map(c=>`<option value="${c.id}" ${UI.hofCycle==c.id?'selected':''}>${c.name||'Cycle '+c.number}</option>`).join('');
+  loadHof(UI.hofCat);
+  return `
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+      <select id="hofCycleSel" style="background:#0c0c0f;border:1px solid var(--b);color:var(--t);border-radius:10px;padding:7px 12px;font:600 13px Manrope,sans-serif;max-width:180px">
+        <option value="all" ${UI.hofCycle==='all'?'selected':''}>🌐 All Time</option>
+        ${cycleOpts}
+      </select>
+    </div>
+    <div class="tabs">${HOF_CATS.map(([k,l])=>`<button class="tb ${UI.hofCat===k?'on':''}" data-hofcat="${k}">${l}</button>`).join('')}</div>
+    <div id="hofArea"><div class="loading"><span class="spin"></span>Loading…</div></div>`;
+}
+async function loadHof(cat){
+  UI.hofCat=cat;
+  await getAvatars();
+  const el=$('#hofArea');if(!el)return;
+  try{
+    const cycleParam=UI.hofCycle&&UI.hofCycle!=='all'?'&cycle_id='+UI.hofCycle:'';
+    const d=await GET('/hall-of-fame?category='+cat+cycleParam);
+    const label=cat==='most_titles'?'Titles':cat==='top_scorers'?'Goals':'Streak';
+    const cycleLabel=UI.hofCycle&&UI.hofCycle!=='all'?(()=>{const c=(DB.cycles||[]).find(x=>x.id==UI.hofCycle);return c?c.name||'Cycle '+c.number:'Cycle';})():'All Time';
+    el.innerHTML=`<div class="card"><div class="ch"><h2>${HOF_CATS.find(c=>c[0]===cat)[1]}</h2><span class="tag">${cycleLabel} · ${d.players.length} ranked</span></div>
+      ${d.players.length?d.players.map((r,i)=>`<div class="hofrow" data-a="pf" data-n="${r.name}" style="cursor:pointer">
+        <span class="hofrank ${i<3?'top':''}">${i+1}</span>${avEl(r.name,34)}
+        <span style="flex:1;font-weight:700">${r.name}</span>
+        <span class="pt">${r.value} ${label}</span>
+      </div>`).join(''):'<p class="mu">No data yet for this cycle.</p>'}
+    </div>`;
+    el.querySelectorAll('[data-a="pf"]').forEach(b=>b.onclick=()=>showProfile(b.dataset.n));
+  }catch(e){el.innerHTML='';toast(e.message,true)}
+}
+
+
+/* ── Admin: Link Account UI ── */
+async function renderAdminLinkUI(){
+  const el=$('#adminLinkArea');if(!el)return;
+  el.innerHTML='<div class="loading"><span class="spin"></span>Loading accounts…</div>';
+  try{
+    const d=await GET('/players/link?users=1');
+    const rows=d.users||[];
+    el.innerHTML=`
+      <div class="card" style="background:linear-gradient(160deg,#1c150a,#110e08);border-color:#3a2b0f">
+        <div class="ch"><h3 style="margin:0;color:#f2dca4">🔗 Link Accounts to Players</h3>
+          <span class="tag">${rows.length} accounts</span></div>
+        <p class="mu" style="margin:0 0 14px;font-size:12px">Each account can be linked to one player. Linked players can upload photos and claim their dashboard.</p>
+        <div style="margin-bottom:12px">
+          <input id="linkSearch" placeholder="Search username…" style="width:100%;max-width:320px">
+        </div>
+        <div id="linkRows">
+          ${rows.map(u=>`
+            <div class="ln linkrow" data-uname="${u.username.toLowerCase()}">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="font-weight:700;color:#f2dca4">${u.username}</span>
+                <span class="tag" style="font-size:10px">${u.role}</span>
+                ${u.player_name?`<span style="color:var(--ok);font-size:12px">→ ${u.player_name}</span>`:'<span class="mu" style="font-size:12px">not linked</span>'}
+              </div>
+              <div style="display:flex;gap:6px;align-items:center">
+                <select class="linkPlSel" data-uid="${u.id}" data-pid="${u.player_id||''}" style="background:#0d0a06;border:1px solid #3a2b0f;color:#f2dca4;border-radius:8px;padding:5px 8px;font-size:12px">
+                  <option value="">— unlinked —</option>
+                  ${(DB.players||[]).map(pl=>`<option value="${pl.id}" ${u.player_id==pl.id?'selected':''}>${pl.name}</option>`).join('')}
+                </select>
+                <button class="btn linkSaveBtn" data-uid="${u.id}" style="padding:5px 12px;font-size:12px">Save</button>
+                ${u.player_id?`<button class="btn red linkUnlinkBtn" data-uid="${u.id}" data-pid="${u.player_id}" style="padding:5px 10px;font-size:12px">✕</button>`:''}
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+    // search filter
+    $('#linkSearch').oninput=e=>{
+      const q=e.target.value.toLowerCase();
+      document.querySelectorAll('.linkrow').forEach(r=>r.style.display=r.dataset.uname.includes(q)?'':'none');
+    };
+    // save links
+    document.querySelectorAll('.linkSaveBtn').forEach(btn=>btn.onclick=async()=>{
+      const uid=btn.dataset.uid;
+      const sel=el.querySelector(`.linkPlSel[data-uid="${uid}"]`);
+      const pid=sel?.value;
+      btn.disabled=true;
+      try{
+        if(pid){await POST('/players/link',{action:'link',player_id:+pid,user_id:uid});toast('Linked!')}
+        else{const op=sel?.dataset.pid;if(op){await POST('/players/link',{action:'unlink',player_id:+op});toast('Unlinked!')}}
+        await renderAdminLinkUI();
+      }catch(e){toast(e.message,true);btn.disabled=false}
+    });
+    // quick unlink X
+    document.querySelectorAll('.linkUnlinkBtn').forEach(btn=>btn.onclick=async()=>{
+      if(!confirm('Unlink this account?'))return;
+      btn.disabled=true;
+      try{await POST('/players/link',{action:'unlink',player_id:+btn.dataset.pid});toast('Unlinked!');await renderAdminLinkUI()}
+      catch(e){toast(e.message,true);btn.disabled=false}
+    });
+  }catch(e){el.innerHTML='<p class="mu">'+e.message+'</p>'}
+}
+
+/* ── BIND EVENTS ── */
+function bindApp(){
+  // Cycle switch
+  document.querySelectorAll('[data-switchchcycle]').forEach(b=>b.onclick=async()=>{
+    UI.cycleId=+b.dataset.switchchcycle;
+    await loadCycleData(UI.cycleId);
+    await loadLeaderboard();
+    renderApp();moveUl();
+  });
+
+  // Season tabs
+  document.querySelectorAll('[data-ssn]').forEach(b=>b.onclick=async()=>{
+    UI.seasonN=+b.dataset.ssn;
+    const se=DB.seasons.find(s=>s.season_number==UI.seasonN);
+    if(se){await loadSeasonBracket(se.id);DB.seasons.find(s=>s.id==se.id).matches=DB.bracketMatches}
+    renderApp();
+  });
+
+  // Player profile
+  document.querySelectorAll('[data-a="pf"]').forEach(b=>b.onclick=()=>showProfile(b.dataset.n));
+
+  // Hall of Fame tabs
+  document.querySelectorAll('[data-hofcat]').forEach(b=>b.onclick=()=>{UI.hofCat=b.dataset.hofcat;renderApp()});
+
+  // Hall of Fame cycle dropdown
+  const hofCycleSel=$('#hofCycleSel');
+  if(hofCycleSel)hofCycleSel.onchange=()=>{UI.hofCycle=hofCycleSel.value;loadHof(UI.hofCat)};
+
+  // Toggle edit mode on a completed season
+  const btnTE=$('#btnToggleEdit');
+  if(btnTE)btnTE.onclick=()=>{
+    const sid=+btnTE.dataset.sid;
+    UI.editSeasonId=(UI.editSeasonId===sid)?null:sid;
+    renderApp();
+  };
+
+  // Save a corrected score on a completed season
+  document.querySelectorAll('[data-editm]').forEach(b=>b.onclick=async()=>{
+    const mid=b.dataset.editm;
+    const ea=$('#ea'+mid),eb=$('#eb'+mid);
+    if(!ea||!eb||ea.value===''||eb.value==='')return toast('Enter both scores',true);
+    const a=+ea.value,bv=+eb.value;
+    if(a===bv)return toast('Knockout matches need a winner',true);
+    if(!confirm('Save this corrected score?\nPlacements, points and streaks for this cycle will be recalculated.'))return;
+    b.disabled=true;
+    try{
+      await POST('/matches/edit',{match_id:+mid,score_a:a,score_b:bv});
+      const sid=UI.editSeasonId;
+      if(sid)await loadSeasonBracket(sid);
+      await loadLeaderboard();
+      const{players}=await GET('/players');DB.players=players||[];
+      toast('Result updated');
+      renderApp();
+    }catch(e){toast(e.message,true);b.disabled=false}
+  });
+
+  // Delete player
+  document.querySelectorAll('[data-deleteplayer]').forEach(b=>b.onclick=async(e)=>{
+    e.stopPropagation();
+    const name=b.dataset.deleteplayer;
+    if(!confirm(`Remove "${name}" from the system?\n\nNote: Players with completed season records cannot be deleted.`))return;
+    b.disabled=true;
+    try{
+      await api('DELETE','/players',{name});
+      const{players}=await GET('/players');DB.players=players||[];
+      renderApp();
+      toast(name+' removed');
+    }catch(e){toast(e.message,true);b.disabled=false}
+  });
+
+  // New cycle
+  const btnNC=$('#btnNewCycle');
+  if(btnNC)btnNC.onclick=async()=>{
+    if(!confirm('Start a new cycle?'))return;
+    btnNC.disabled=true;
+    try{await POST('/cycles');const{cycles}=await GET('/cycles');DB.cycles=cycles;UI.cycleId=cycles[cycles.length-1].id;await loadCycleData(UI.cycleId);UI.view='play';render()}
+    catch(e){toast(e.message,true);btnNC.disabled=false}
+  };
+
+  // Next season
+  const btnNS=$('#btnNextSeason');
+  if(btnNS)btnNS.onclick=async()=>{
+    btnNS.disabled=true;
+    try{await POST('/seasons?cycle_id='+UI.cycleId);await loadCycleData(UI.cycleId);renderApp()}
+    catch(e){toast(e.message,true);btnNS.disabled=false}
+  };
+
+  // Add player
+  const btnAP=$('#btnAddPlayer');
+  if(btnAP)btnAP.onclick=()=>doAddPlayer();
+  const pnInput=$('#pn');
+  if(pnInput)pnInput.addEventListener('keydown',e=>{if(e.key==='Enter')doAddPlayer()});
+
+  // Quick add
+  const btnCancel=$('#btnCancelTournament');
+  if(btnCancel)btnCancel.onclick=async()=>{
+    const se=DB.currentSeason;
+    const msg=se.started
+      ?'Cancel this tournament? All match results and player entries will be deleted. This cannot be undone.'
+      :'Cancel this tournament? All player entries will be removed.';
+    if(!confirm(msg))return;
+    btnCancel.disabled=true;
+    try{
+      await POST('/seasons/cancel',{season_id:se.id,force:true});
+      UI._step=null;
+      await loadCycleData(UI.cycleId);
+      await loadLeaderboard();
+      const{players}=await GET('/players');DB.players=players||[];
+      renderApp();
+      toast('Tournament cancelled');
+    }catch(e){toast(e.message,true);btnCancel.disabled=false}
+  };
+  document.querySelectorAll('[data-qaplayer]').forEach(b=>b.onclick=()=>doQuickAdd(b.dataset.qaplayer));
+
+  // Remove player chip
+document.querySelectorAll('[data-rmplayer]').forEach(b=>b.onclick=async()=>{
+    const se=DB.currentSeason;
+    const name=b.dataset.rmplayer;
+    se.season_players=(se.season_players||[]).filter(p=>(p.name||p)!==name);
+    try{
+      await POST('/seasons/remove-player',{season_id:se.id,name});
+      renderApp();
+    }catch(e){toast(e.message,true);se.season_players.push({name});renderApp()}
+  });
+
+  // Go to matchup setup
+  const btnSM=$('#btnSetMatchups');
+  if(btnSM)btnSM.onclick=()=>{
+    const se=DB.currentSeason;
+    if((se.season_players||[]).length===8){UI._step='matchups';renderApp()}
+    else toast('Need exactly 8 players first',true);
+  };
+
+  // Shuffle
+  const btnSh=$('#btnShuffle');
+  if(btnSh)btnSh.onclick=()=>{
+    const ps=[...document.querySelectorAll('.ps')];
+    const vals=ps.map(s=>s.value).sort(()=>Math.random()-.5);
+    ps.forEach((s,i)=>s.value=vals[i]);
+  };
+
+  // Start bracket
+  const btnSB=$('#btnStartBracket');
+  if(btnSB)btnSB.onclick=async()=>{
+    const selects=[...document.querySelectorAll('.ps')];
+    const vals=selects.map(s=>s.value);
+    if(new Set(vals).size<8)return toast('Each player can only appear once',true);
+    const matchups=[[vals[0],vals[1]],[vals[2],vals[3]],[vals[4],vals[5]],[vals[6],vals[7]]];
+    btnSB.disabled=true;
+    try{
+      const se=DB.currentSeason;
+      await POST('/bracket?season_id='+se.id,{matchups});
+      UI._step=null;
+      await loadCycleData(UI.cycleId);
+      await loadSeasonBracket(se.id);
+      renderApp();
+    }catch(e){toast(e.message,true);btnSB.disabled=false}
+  };
+
+  // Back to players step
+  const btnBP=$('#btnBackPlayers');
+  if(btnBP)btnBP.onclick=()=>{UI._step=null;renderApp()};
+
+  // Lock match score
+  document.querySelectorAll('[data-lockm]').forEach(b=>b.onclick=async()=>{
+    const mid=b.dataset.lockm;
+    const sa=$('#sa'+mid),sb=$('#sb'+mid);
+    if(!sa||!sb||sa.value===''||sb.value==='')return toast('Enter both scores',true);
+    const a=+sa.value,bv=+sb.value;
+    if(a===bv)return toast('Knockout matches need a winner',true);
+    b.disabled=true;
+    try{
+      const r=await POST('/matches/result',{match_id:+mid,score_a:a,score_b:bv});
+      if(r&&r.season_done)await seasonFinished('Tournament finished! Points awarded');
+      else await loadSeasonBracket(DB.currentSeason.id);
+      renderApp();
+    }catch(e){toast(e.message,true);b.disabled=false}
+  });
+
+  // Finish tournament (also repairs a season that has all results but was never closed)
+  const btnFin=$('#btnFinish');
+  if(btnFin)btnFin.onclick=async()=>{
+    if(!confirm('Finish this tournament and award points?'))return;
+    btnFin.disabled=true;
+    try{await POST('/seasons/finish',{season_id:DB.currentSeason.id});await seasonFinished('Tournament finished! Points awarded');renderApp()}
+    catch(e){toast(e.message,true);btnFin.disabled=false}
+  };
+}
+
+async function seasonFinished(msg){
+  await loadCycleData(UI.cycleId);
+  const{players}=await GET('/players');DB.players=players||[];
+  await loadLeaderboard();
+  if(DB.currentSeason)await loadSeasonBracket(DB.currentSeason.id);
+  AVCACHE=null;
+  toast(msg);
+}
+
+/* ── DATA HELPERS ── */
+async function loadLeaderboard(){
+  if(!UI.cycleId)return;
+  try{const d=await GET('/leaderboard?cycle_id='+UI.cycleId);DB.leaderboard=d.leaderboard||[]}
+  catch(e){}
+}
+
+async function loadSeasonBracket(seasonId){
+  try{
+    const d=await GET('/bracket?season_id='+seasonId);
+    DB.bracketMatches=d.matches||[];
+    // attach to season
+    const se=DB.seasons.find(s=>s.id==seasonId);
+    if(se){se.matches=DB.bracketMatches;se.season_players=d.season_players||[]}
+  }catch(e){}
+}
+
+async function doAddPlayer(){
+  const inp=$('#pn');if(!inp)return;
+  const name=inp.value.trim();if(!name)return;
+  const se=DB.currentSeason;
+  se.season_players=se.season_players||[];
+  const already=se.season_players.map(p=>p.name||p);
+  if(already.map(n=>n.toLowerCase()).includes(name.toLowerCase()))return toast('Already added',true);
+  if(already.length>=8)return toast('Already have 8 players',true);
+  // Optimistic update — add locally first, then persist
+  se.season_players.push({name});
+  inp.value='';
+  renderApp();
+  try{
+    await POST('/seasons/add-player',{season_id:se.id,name});
+    toast(name+' added!');
+  }catch(e){
+    // Rollback on failure
+    se.season_players=se.season_players.filter(p=>(p.name||p)!==name);
+    renderApp();
+    toast(e.message,true);
+  }
+}
+async function doQuickAdd(name){
+  const se=DB.currentSeason;
+  se.season_players=se.season_players||[];
+  const already=se.season_players.map(p=>p.name||p);
+  if(already.length>=8)return toast('Already have 8 players',true);
+  if(already.map(n=>n.toLowerCase()).includes(name.toLowerCase()))return toast('Already added',true);
+  // Optimistic update
+  se.season_players.push({name});
+  renderApp();
+  try{
+    await POST('/seasons/add-player',{season_id:se.id,name});
+    toast(name+' added!');
+  }catch(e){
+    se.season_players=se.season_players.filter(p=>(p.name||p)!==name);
+    renderApp();
+    toast(e.message,true);
+  }
+}
+
+/* ── FULL DATA LOAD AFTER CYCLE SWITCH ── */
+async function loadAll(){
+  await loadCycleData(UI.cycleId);
+  await loadLeaderboard();
+  if(DB.currentSeason){await loadSeasonBracket(DB.currentSeason.id)}
+}
+
+/* ── BOOT ── */
+async function boot(){
+  const urlP=new URLSearchParams(location.search);
+  const resetTok=urlP.get('reset');
+  if(resetTok){history.replaceState({},'','/');renderReset(resetTok);return}
+  if(loadAuth()){
+    await init();
+    if(DB.currentSeason&&!DB.currentSeason.done){await loadSeasonBracket(DB.currentSeason.id)}
+    await loadLeaderboard();
+    render();
+  }else{
+    renderAuth();
+  }
+}
+
+boot();
+</script>
+</body></html>
